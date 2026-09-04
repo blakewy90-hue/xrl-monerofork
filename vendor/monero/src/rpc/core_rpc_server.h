@@ -172,6 +172,11 @@ namespace cryptonote
         MAP_JON_RPC_WE_IF("prune_blockchain",    on_prune_blockchain,           COMMAND_RPC_PRUNE_BLOCKCHAIN, !m_restricted)
         MAP_JON_RPC_WE_IF("flush_cache",         on_flush_cache,                COMMAND_RPC_FLUSH_CACHE, !m_restricted)
         MAP_JON_RPC_WE("get_txids_loose",        on_get_txids_loose,            COMMAND_RPC_GET_TXIDS_LOOSE)
+        MAP_JON_RPC_WE_IF("start_mining",        on_start_mining,               COMMAND_RPC_START_MINING, !m_restricted)
+        MAP_JON_RPC_WE_IF("stop_mining",         on_stop_mining,                COMMAND_RPC_STOP_MINING, !m_restricted)
+        MAP_JON_RPC_WE_IF("mining_status",       on_mining_status,              COMMAND_RPC_MINING_STATUS, !m_restricted)
+        MAP_JON_RPC_WE_IF("stop_daemon",         on_stop_daemon,                COMMAND_RPC_STOP_DAEMON, !m_restricted)
+        MAP_JON_RPC_WE_IF("save_bc",             on_save_bc,                    COMMAND_RPC_SAVE_BC, !m_restricted)
       END_JSON_RPC_MAP()
     END_URI_MAP2()
 

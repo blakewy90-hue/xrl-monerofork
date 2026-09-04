@@ -50,6 +50,18 @@ if not exist build\monero-xrl\build.ninja if not exist build\monero-xrl\Makefile
 cmake --build build\monero-xrl --target daemon simplewallet --parallel
 if errorlevel 1 exit /b %errorlevel%
 
+rem --- Stage runtime DLLs next to the binaries so monerod/wallet run without PATH hacks ---
+set "BIN=build\monero-xrl\bin"
+if not "%MINGW_BIN%"=="" (
+  copy /y "%MINGW_BIN%\*.dll" "%BIN%\" >NUL 2>NUL
+)
+if exist vendor\vcpkg\installed\x64-mingw-dynamic\bin (
+  copy /y vendor\vcpkg\installed\x64-mingw-dynamic\bin\*.dll "%BIN%\" >NUL 2>NUL
+)
+if exist vendor\vcpkg\downloads\unbound-stage\mingw64\bin (
+  copy /y vendor\vcpkg\downloads\unbound-stage\mingw64\bin\*.dll "%BIN%\" >NUL 2>NUL
+)
+
 echo.
 echo ===================================================
 echo   XRL Monero fork build successful
