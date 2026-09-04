@@ -29,7 +29,9 @@ build/
 data/
 testnet-data/
 testnet-data-smoke/
+testnet-data-*/
 test_data_tdd/
+seed-node-data/
 InstallationLog.txt
 .smoke-path.txt
 
