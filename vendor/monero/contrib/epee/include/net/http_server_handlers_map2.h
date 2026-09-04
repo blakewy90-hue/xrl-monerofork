@@ -248,6 +248,28 @@
   return true;\
 }
 
+#define MAP_JON_RPC_IF(method_name, callback_f, command_type, cond) \
+    else if((callback_name == method_name) && (cond)) \
+{ \
+  PREPARE_OBJECTS_FROM_JSON(command_type) \
+  MINFO(m_conn_context << "calling RPC method " << method_name); \
+  bool res = false; \
+  try { res = callback_f(req.params, resp.result, &m_conn_context); } \
+  catch (const std::exception &e) { MERROR(m_conn_context << "Failed to " << #callback_f << "(): " << e.what()); } \
+  if (!res) \
+  { \
+    epee::json_rpc::error_response fail_resp = AUTO_VAL_INIT(fail_resp); \
+    fail_resp.jsonrpc = "2.0"; \
+    fail_resp.id = req.id; \
+    fail_resp.error.code = -32603; \
+    fail_resp.error.message = "Internal error"; \
+    epee::serialization::store_t_to_json(static_cast<epee::json_rpc::error_response&>(fail_resp), response_info.m_body); \
+    return true; \
+  } \
+  FINALIZE_OBJECTS_TO_JSON(method_name) \
+  return true;\
+}
+
 #define END_JSON_RPC_MAP() \
   epee::json_rpc::error_response rsp; \
   rsp.id = id_; \
