@@ -40,3 +40,39 @@ placeholder proofs cannot be used as an adapter.
 Until that migration is complete, the original binaries are not production
 cryptocurrency software and must not share a network with the imported Monero
 code.
+
+---
+
+## Migration status (2026-09-04)
+
+The following migration items are now **complete** and verified on a fresh
+testnet chain (genesis `bc8210c0...`, height 5+):
+
+- **Distinct genesis blocks**: deterministic `xrl-genesis-tool` generates
+  reproducible XRL coinbase transactions for mainnet/testnet/stagenet from a
+  published seed. Applied to `cryptonote_config.h` for all three networks.
+- **XRL address prefixes**: testnet addresses now use prefix `0x1b4` (standard),
+  `0x1b5` (integrated), `0x1b6` (subaddress). Verified: new testnet address
+  starts with `X7M2ioWwqi...` (distinct from Monero).
+- **Ring size 16**: enforced at HF v15 via `get_min_ring_size()`/`get_max_ring_size()`
+  in `wallet2.cpp` and consensus mixin rules in `blockchain.cpp`.
+- **Emission / difficulty**: 150s target, 720-block LWMA window, 0.6 XRL tail
+  emission already set in the vendored `cryptonote_config.h`.
+- **Branding**: binary reports `RandomLite XRL` instead of `Monero 'Fluorine Fermi'`.
+- **JSON-RPC mining methods**: `start_mining`, `stop_mining`, `mining_status`,
+  `stop_daemon`, `save_bc` now dispatched via `/json_rpc` (new `MAP_JON_RPC_IF` macro).
+- **Seed nodes**: `get_ip_seed_nodes()` now returns loopback dev seeds per network
+  for local 2-node sync; production seeds go in `net_node.h` once provisioned.
+- **wallet-rpc**: `monero-wallet-rpc.exe` builds and is produced by the build.
+- **Portable binaries**: `build-monero.bat` stages all 30 runtime DLLs next to the
+  binaries; `monerod.exe --version` runs with a clean PATH.
+- **Stub tree quarantined**: top-level `CMakeLists.txt` prototype targets are
+  disabled by default (`XRL_BUILD_PROTOTYPE=OFF`); `build-monero.bat` is the
+  authoritative production build.
+
+### Still open for a full mainnet launch
+- Real production seed node hostnames/IPs (currently loopback dev seeds).
+- Mainnet genesis coinbase is generated but mainnet keys should be finalized in an
+  audit pass with the seed published.
+- The `src/` prototype is kept for reference only; do not use its binaries.
+- RandomX 1440-block seed epoch (non-power-of-two) remains a hard consensus change.

@@ -236,7 +236,7 @@ namespace config
   boost::uuids::uuid const NETWORK_ID = { {
       0x52, 0x41, 0x4e, 0x44, 0x4f, 0x4d, 0x4c, 0x49, 0x54, 0x45, 0x50, 0x52, 0x49, 0x56, 0x30, 0x31
     } }; // RANDOMLITEPRIV01
-  std::string const GENESIS_TX = "010a01ff0001b3e7a0f7d9fe03029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd08807121017767aafcde9be00dcfd098715ebcf7f410daebc582fda69d24a28e9d0bc890d1";
+  std::string const GENESIS_TX = "010a01ff0001b3e7a0f7d9fe03028d37c6a952c6ba6947d68cb3523ed0032e3efa486ab94c340ad389a340ce27d32101f8616b8e1f852bb3bdbc1730ca759dd55225ffc193fde257c63d732488bdb441";
   uint32_t const GENESIS_NONCE = 0x58524c31; // 'XRL1'
 
   // Hash domain separators
@@ -269,16 +269,16 @@ namespace config
 
   namespace testnet
   {
-    uint64_t const CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 53;
-    uint64_t const CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 54;
-    uint64_t const CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 63;
+    uint64_t const CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 0x1b4; // 'XRL' testnet standard address
+    uint64_t const CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 0x1b5;
+    uint64_t const CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 0x1b6;
     uint16_t const P2P_DEFAULT_PORT = 48080;
     uint16_t const RPC_DEFAULT_PORT = 48081;
     uint16_t const ZMQ_RPC_DEFAULT_PORT = 48082;
     boost::uuids::uuid const NETWORK_ID = { {
         0x52, 0x41, 0x4e, 0x44, 0x4f, 0x4d, 0x4c, 0x49, 0x54, 0x45, 0x54, 0x45, 0x53, 0x54, 0x30, 0x31
       } }; // RANDOMLITETEST01
-    std::string const GENESIS_TX = "010a01ff0001b3e7a0f7d9fe03029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd08807121017767aafcde9be00dcfd098715ebcf7f410daebc582fda69d24a28e9d0bc890d1";
+    std::string const GENESIS_TX = "010a01ff0001b3e7a0f7d9fe0302657e3508743d4ae74ad501239d22a97490aedd73d78f41e54059b9c1a2621d3d21012e5354c4be6fe1230b6c2f19219cfc964674867f4be79ffc498257b9e2c41781";
     uint32_t const GENESIS_NONCE = 0x58524c54; // 'XRLT'
   }
 
@@ -293,7 +293,7 @@ namespace config
     boost::uuids::uuid const NETWORK_ID = { {
         0x52, 0x41, 0x4e, 0x44, 0x4f, 0x4d, 0x4c, 0x49, 0x54, 0x45, 0x53, 0x54, 0x41, 0x47, 0x45, 0x31
       } }; // RANDOMLITESTAGE1
-    std::string const GENESIS_TX = "010a01ff0001b3e7a0f7d9fe0302df5d56da0c7d643ddd1ce61901c7bdc5fb1738bfe39fbe69c28a3a7032729c0f2101168d0c4ca86fb55a4cf6a36d31431be1c53a3bd7411bb24e8832410289fa6f3b";
+    std::string const GENESIS_TX = "010a01ff0001b3e7a0f7d9fe03029adcb9f3dcec27efc86b4feefa1c8708cd4683cf388dcf56eeb05e16ba1e46362101cde0c1d0cfee2c1e68205c769fd140de7af740e38fcb18d79feed2a679735039";
     uint32_t const GENESIS_NONCE = 0x58524c53; // 'XRLS'
   }
 }

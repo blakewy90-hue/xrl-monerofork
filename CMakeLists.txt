@@ -1,6 +1,19 @@
 cmake_minimum_required(VERSION 3.14)
 project(randomlite CXX C)
 
+# ============================================================================
+#  AUTHORITATIVE PRODUCTION BUILD: use build-monero.bat (vendored Monero).
+#  The targets below are the ORIGINAL pre-migration prototype. They contain
+#  placeholder crypto / mock RandomX / mock LMDB and are NOT production-safe.
+#  They are kept only for historical reference and are DISABLED by default.
+#  Enable explicitly with:  cmake -DXRL_BUILD_PROTOTYPE=ON
+# ============================================================================
+option(XRL_BUILD_PROTOTYPE "Build the legacy prototype stub binaries (NOT production)" OFF)
+if(NOT XRL_BUILD_PROTOTYPE)
+  message(STATUS "XRL: prototype stubs disabled. Use build-monero.bat for the real production build.")
+  return()
+endif()
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
