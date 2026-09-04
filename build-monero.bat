@@ -24,6 +24,7 @@ if not exist build\monero-xrl\build.ninja if not exist build\monero-xrl\Makefile
   if not errorlevel 1 (
     cmake -S vendor\monero -B build\monero-xrl -G Ninja ^
       -DCMAKE_BUILD_TYPE=Release ^
+      -DMANUAL_SUBMODULES=1 ^
       -DBUILD_TESTS=OFF ^
       -DBUILD_DOCUMENTATION=OFF ^
       -DBUILD_DEBUG_UTILITIES=OFF ^
@@ -35,6 +36,7 @@ if not exist build\monero-xrl\build.ninja if not exist build\monero-xrl\Makefile
   ) else (
     cmake -S vendor\monero -B build\monero-xrl -G "MinGW Makefiles" ^
       -DCMAKE_BUILD_TYPE=Release ^
+      -DMANUAL_SUBMODULES=1 ^
       -DBUILD_TESTS=OFF ^
       -DBUILD_DOCUMENTATION=OFF ^
       -DBUILD_DEBUG_UTILITIES=OFF ^
@@ -47,7 +49,7 @@ if not exist build\monero-xrl\build.ninja if not exist build\monero-xrl\Makefile
   if errorlevel 1 exit /b %errorlevel%
 )
 
-cmake --build build\monero-xrl --target daemon simplewallet --parallel
+cmake --build build\monero-xrl --target daemon simplewallet wallet_rpc_server xrl-genesis-tool --parallel
 if errorlevel 1 exit /b %errorlevel%
 
 rem --- Stage runtime DLLs next to the binaries so monerod/wallet run without PATH hacks ---
