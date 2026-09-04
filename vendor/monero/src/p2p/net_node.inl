@@ -832,16 +832,11 @@ namespace nodetool
   template<class t_payload_net_handler>
   std::set<std::string> node_server<t_payload_net_handler>::get_ip_seed_nodes() const
   {
-    // RandomLite: loopback dev seed so two local nodes can discover each other.
-    // Production seeds go here once hostnames/IPs are provisioned.
-    std::set<std::string> full_addrs;
-    if (m_nettype == cryptonote::TESTNET)
-      full_addrs.insert("127.0.0.1:" + std::to_string(::config::testnet::P2P_DEFAULT_PORT));
-    else if (m_nettype == cryptonote::STAGENET)
-      full_addrs.insert("127.0.0.1:" + std::to_string(::config::stagenet::P2P_DEFAULT_PORT));
-    else
-      full_addrs.insert("127.0.0.1:" + std::to_string(::config::P2P_DEFAULT_PORT));
-    return full_addrs;
+    // RandomLite: no hardcoded seed IPs yet. Local multi-node testing must use
+    // --add-peer/--add-exclusive-node with --allow-local-ip (loopback peers are
+    // otherwise rejected by the peer filter, and a default-port seed makes the
+    // node try to handshake with itself, which permanently blocks sync status).
+    return {};
   }
   //-----------------------------------------------------------------------------------
   template<class t_payload_net_handler>

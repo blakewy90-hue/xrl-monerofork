@@ -61,8 +61,17 @@ testnet chain (genesis `bc8210c0...`, height 5+):
 - **Branding**: binary reports `RandomLite XRL` instead of `Monero 'Fluorine Fermi'`.
 - **JSON-RPC mining methods**: `start_mining`, `stop_mining`, `mining_status`,
   `stop_daemon`, `save_bc` now dispatched via `/json_rpc` (new `MAP_JON_RPC_IF` macro).
-- **Seed nodes**: `get_ip_seed_nodes()` now returns loopback dev seeds per network
-  for local 2-node sync; production seeds go in `net_node.h` once provisioned.
+- **Seed nodes**: hardcoded seed list intentionally left EMPTY. A loopback seed
+  was tried and reverted: a node on the default port handshakes with itself,
+  never reaches "synchronized", and `start_mining` stays BUSY. For local
+  multi-node testing use `--allow-local-ip` on every node plus
+  `--add-exclusive-node 127.0.0.1:<p2p-port>` on the joining node (verified:
+  2-node sync + live block relay both directions). Production seeds go in
+  `net_node.h` once provisioned.
+- **Known upstream quirk**: the node holding the chain tip stays
+  `"synchronized": false` until it catches up *from* a peer, and `start_mining`
+  returns BUSY meanwhile. Mine from the joining/synced node, or use `--offline`
+  for single-node solo mining.
 - **wallet-rpc**: `monero-wallet-rpc.exe` builds and is produced by the build.
 - **Portable binaries**: `build-monero.bat` stages all 30 runtime DLLs next to the
   binaries; `monerod.exe --version` runs with a clean PATH.
