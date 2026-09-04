@@ -35,6 +35,8 @@ InstallationLog.txt
 
 # Wallet files and keys (never commit)
 testnet-wallet/
+testnet-wallet-v2/
+testnet-data-v2/
 *.keys
 *.address.txt
 
